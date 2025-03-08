@@ -1,0 +1,47 @@
+<!-- views/about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+ <!-- Navbar Partial -->
+  <%- include('partials/navbar', {page: '/about'}) %>
+ 
+  
+    
+      <!-- Hero Section -->
+      <section class="container mx-auto p-8">
+        <div class="bg-base-200 p-8 rounded-lg">
+            <div class="hero-content text-center">
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-900">About</h1>
+                    <p class="text-lg text-gray-700 mt-4">
+                        All about me and my passion for web development
+                    </p>
+                </div>
+            </div>
+        </div>
+   
+<!--  End Hero Section -->
+
+    <div >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+            <div>
+                <img src="https://modernanalyst.com/Portals/0/Public%20Uploads/Fin552-Executive-Tech-Talk.jpg" alt="Profile Image" class="rounded-lg shadow-lg">
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold">Preeya Surisai</h2>
+                <p>I'm a student learning full-stack web development. I enjoy working on projects involving HTML, CSS, and JavaScript. 
+                    My hobbies include coding, music, and exploring new technologies</p>
+            </div>
+        </div>
+    </div>
+</section>
+    
+</body>
+</html>

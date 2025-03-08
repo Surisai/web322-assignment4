@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Historic Sites</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar Partial -->
+    <%- include('partials/navbar', { page: '/home' }) %>
+
+    <!-- Hero Section -->
+    <div class="container mx-auto p-8">
+        <!-- Welcome Section -->
+        <div class="bg-base-200 p-8 rounded-lg">
+            <div class="hero-content text-center">
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-900">Welcome</h1>
+                    <p class="text-lg text-gray-700 mt-4">
+                        Canada has a rich history shaped by Indigenous cultures, 
+                        European exploration, and colonial rule. It became a self-governing
+                        dominion in 1867 with the Confederation of Ontario, Quebec, New Brunswick, 
+                        and Nova Scotia.
+                    </p>
+                    <a href="/sites" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            <!-- Dynamic Cards (Only 3 cards will be rendered) -->
+            <% sites.forEach(site => { %>
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-lg active:shadow-xl">
+                    <img src="<%= site.image %>" alt="<%= site.site %>" class="w-full h-48 object-cover">
+                    <div class="card-content p-4">
+                        <h2 class="card-title text-lg font-semibold text-gray-900"><%= site.site %></h2>
+                        <p class="card-description text-sm text-gray-600 mt-2"><%= site.description || "No description available." %></p>
+                        <p class="card-description text-sm text-gray-600 mt-2"><b>Date:</b> <%= site.date %> (<%= site.dateType %>)</p>
+                        <p class="card-description text-sm text-gray-600 mt-2"><b>Location:</b> <%= site.location %>, <%= site.provinceOrTerritoryObj.name %></p>
+                        <a href="/sites/<%= site.siteId %>" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

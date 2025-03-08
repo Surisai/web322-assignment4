@@ -1,0 +1,16 @@
+
+
+<!--Navigation Main bar home/about/sites-->
+<nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+    <!-- Left Side: Logo / Title -->
+    <a href="/home" class="text-xl font-bold text-gray-900 flex items-center space-x-2">
+        <span>National Historic Sites</span>
+        <img src="/Image/flag.png" class="w-14 h-8 object-contain" alt="Canada Flag">
+    </a>
+
+    <!-- Right Side: Links -->
+    <div class="flex items-center space-x-6">
+        <a href="/sites" class="<%= (page == '/sites') ? 'text-gray-900' : 'text-gray-700' %> hover:text-gray-900 hover:shadow-md transition duration-300 px-3 py-2 rounded-md">View Site Collection</a>
+        <a href="/about" class="<%= (page == '/about') ? 'text-gray-900' : 'text-gray-700' %> hover:text-gray-900 hover:shadow-md transition duration-300 px-3 py-2 rounded-md">About</a>
+    </div>
+</nav>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sites Collection</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation bar -->
+    <%- include('partials/navbar', { page: '/sites' }) %>
+
+    <!-- Hero Section -->
+
+<section class="container mx-auto p-8">
+    <div class="bg-base-200 p-8 rounded-lg">
+        <div class="hero-content text-center">
+            <div>
+                <h1 class="text-4xl font-bold text-gray-900">Welcome to the Site Collection</h1>
+                <p class="text-lg text-gray-700 mt-4">
+                    Browse National Historic Sites by clicking a region or province/territory below.
+                </p>
+                
+                <p>by Region, e.g.,
+                <div class="flex flex-wrap justify-center gap-2 mt-4">
+                    <a href="/sites?region=Atlantic Region" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">Atlantic Region</a>
+                    <a href="/sites?region=Central Canada" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">Central Canada</a>
+                    <a href="/sites?region=Prairie Province" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800btn-Region">Prairie Province</a>
+                </div>
+                </p>
+                <p>by Province/Territory
+                <div class="flex flex-wrap justify-center gap-2 mt-4">
+                    <a href="/sites?provinceOrTerritory=Ontario" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Ontario</a>
+                    <a href="/sites?provinceOrTerritory=Quebec" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Quebec</a>
+                    <a href="/sites?provinceOrTerritory=Yukon" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Yukon</a>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <!-- Table Section -->
+    <div class="overflow-x-auto p-8">
+        <table class="table">
+            <!-- Table Head -->
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Site Name</th>
+                    <th>Date & Designated</th>
+                    <th>Location</th>
+                    <th>Region</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody>
+                <% sites.forEach((site, index) => { %>
+                    <tr class="hover:bg-base-300">
+                        <!-- Image -->
+                        <th>
+                          <img src="<%= site.image %>" alt="<%= site.site %>" class="w-32 h-32 rounded-lg object-cover">
+
+
+
+                        </th>
+                        <!-- Site Name -->
+                        <td><%= site.site %></td>
+                        <!-- Date & Designated -->
+                        <td>
+                            <p>Date: <%= site.date %> (<%= site.dateType %>)</p>
+                            <p>Designated: <%= site.designated %></p>
+                        </td>
+                        <!-- Location -->
+                        <td>
+                            <%= site.location %>, 
+                            <a href="/sites?provinceOrTerritory=<%= site.provinceOrTerritoryObj.name %>" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-location">
+                                <%= site.provinceOrTerritoryObj.name %>
+                            </a>
+                        </td>
+                        <!-- Region -->
+                        <td>
+                            <a href="/sites?region=<%= site.provinceOrTerritoryObj.region %>" class= "btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">
+                                <%= site.provinceOrTerritoryObj.region %>
+                            </a>
+                        </td>
+                        <!-- Details Link -->
+                        <td>
+                            <a href="/sites/<%= site.siteId %>" class="btn btn-soft bg-green-500 text-white hover:bg-green-600">More Info</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
