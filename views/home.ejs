@@ -38,8 +38,11 @@
                         <h2 class="card-title text-lg font-semibold text-gray-900"><%= site.site %></h2>
                         <p class="card-description text-sm text-gray-600 mt-2"><%= site.description || "No description available." %></p>
                         <p class="card-description text-sm text-gray-600 mt-2"><b>Date:</b> <%= site.date %> (<%= site.dateType %>)</p>
-                        <p class="card-description text-sm text-gray-600 mt-2"><b>Location:</b> <%= site.location %>, <%= site.provinceOrTerritoryObj.name %></p>
-                        <a href="/sites/<%= site.siteId %>" class="btn btn-secondary">Learn More</a>
+                        <p class="card-description text-sm text-gray-600 mt-2">
+                            <b>Location:</b> <%= site.location %>, <%= site.ProvinceOrTerritory ? site.ProvinceOrTerritory.name : "Unknown" %>
+                        </p>
+                        <!--Button-->                      
+                         <a href="/sites/<%= site.siteId %>" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
             <% }) %>

@@ -11,37 +11,34 @@
     <%- include('partials/navbar', { page: '/sites' }) %>
 
     <!-- Hero Section -->
+    <section class="container mx-auto p-8">
+        <div class="bg-base-200 p-8 rounded-lg">
+            <div class="hero-content text-center">
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-900">Welcome to the Site Collection<span class="text-base text-primary">(<%= siteCount %>)</span></h1>
 
-<section class="container mx-auto p-8">
-    <div class="bg-base-200 p-8 rounded-lg">
-        <div class="hero-content text-center">
-            <div>
-                <h1 class="text-4xl font-bold text-gray-900">Welcome to the Site Collection</h1>
-                <p class="text-lg text-gray-700 mt-4">
-                    Browse National Historic Sites by clicking a region or province/territory below.
-                </p>
-                
-                <p>by Region, e.g.,
-                <div class="flex flex-wrap justify-center gap-2 mt-4">
-                    <a href="/sites?region=Atlantic Region" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">Atlantic Region</a>
-                    <a href="/sites?region=Central Canada" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">Central Canada</a>
-                    <a href="/sites?region=Prairie Province" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800btn-Region">Prairie Province</a>
+                    <p class="text-lg text-gray-700 mt-4">
+                        Browse National Historic Sites by clicking a region or province/territory below.
+                    </p>
+                    
+                    <p class="mt-4">Browse by Region:</p>
+                    <div class="flex flex-wrap justify-center gap-2 mt-2">
+                        <a href="/sites?region=Atlantic Region" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">Atlantic Region</a>
+                        <a href="/sites?region=Central Canada" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">Central Canada</a>
+                        <a href="/sites?region=Prairie Province" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">Prairie Province</a>
+                    </div>
+                    </p>
+                    <p>by Province/Territory
+                    <div class="flex flex-wrap justify-center gap-2 mt-4">
+                        <a href="/sites?provinceOrTerritory=Ontario" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Ontario</a>
+                        <a href="/sites?provinceOrTerritory=Quebec" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Quebec</a>
+                        <a href="/sites?provinceOrTerritory=Yukon" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Yukon</a>
+                    </div>
+                    </p>
                 </div>
-                </p>
-                <p>by Province/Territory
-                <div class="flex flex-wrap justify-center gap-2 mt-4">
-                    <a href="/sites?provinceOrTerritory=Ontario" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Ontario</a>
-                    <a href="/sites?provinceOrTerritory=Quebec" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Quebec</a>
-                    <a href="/sites?provinceOrTerritory=Yukon" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Province">Yukon</a>
-                </div>
-                </p>
             </div>
         </div>
-    </div>
-</section>
-
-
-
+    </section>
 
     <!-- Table Section -->
     <div class="overflow-x-auto p-8">
@@ -54,7 +51,7 @@
                     <th>Date & Designated</th>
                     <th>Location</th>
                     <th>Region</th>
-                    <th>Details</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <!-- Table Body -->
@@ -63,10 +60,7 @@
                     <tr class="hover:bg-base-300">
                         <!-- Image -->
                         <th>
-                          <img src="<%= site.image %>" alt="<%= site.site %>" class="w-32 h-32 rounded-lg object-cover">
-
-
-
+                            <img src="<%= site.image %>" alt="<%= site.site %>" class="w-32 h-32 rounded-lg object-cover">
                         </th>
                         <!-- Site Name -->
                         <td><%= site.site %></td>
@@ -78,19 +72,28 @@
                         <!-- Location -->
                         <td>
                             <%= site.location %>, 
-                            <a href="/sites?provinceOrTerritory=<%= site.provinceOrTerritoryObj.name %>" class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-location">
-                                <%= site.provinceOrTerritoryObj.name %>
+                            <a href="/sites?provinceOrTerritory=<%= site.ProvinceOrTerritory ? site.ProvinceOrTerritory.name : 'Unknown' %>" 
+                                class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-location">
+                                <%= site.ProvinceOrTerritory ? site.ProvinceOrTerritory.name : 'Unknown' %>
                             </a>
                         </td>
                         <!-- Region -->
                         <td>
-                            <a href="/sites?region=<%= site.provinceOrTerritoryObj.region %>" class= "btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">
-                                <%= site.provinceOrTerritoryObj.region %>
+                            <a href="/sites?region=<%= site.ProvinceOrTerritory ? site.ProvinceOrTerritory.region : 'Unknown' %>" 
+                                class="btn btn-soft bg-pink-700 text-white hover:bg-pink-800 btn-Region">
+                                <%= site.ProvinceOrTerritory ? site.ProvinceOrTerritory.region : 'Unknown' %>
                             </a>
                         </td>
-                        <!-- Details Link -->
+                        <!-- Actions: More Info, Edit, Delete -->
                         <td>
                             <a href="/sites/<%= site.siteId %>" class="btn btn-soft bg-green-500 text-white hover:bg-green-600">More Info</a>
+                            <a href="/editSite/<%= site.siteId %>" class="btn btn-soft bg-yellow-500 text-white hover:bg-yellow-600">Edit</a>
+                            
+                            <!-- DELETE BUTTON  -->
+                            <form action="/deleteSite" method="POST" onsubmit="return confirm('Are you sure you want to delete this site?');" style="display:inline;">
+                                <input type="hidden" name="siteId" value="<%= site.siteId %>">
+                                <button type="submit" class="btn btn-soft bg-red-500 text-white hover:bg-red-600">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 <% }) %>

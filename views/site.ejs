@@ -38,8 +38,8 @@
                 <p><strong>Site Name:</strong> <%= site.site %></p>
                 <p><strong>Site Description:</strong> <%= site.description %></p>
                 <p><strong>Date:</strong> <%= site.date %> (<%= site.dateType %>)</p>
-                <p><strong>Location:</strong> <%= site.location %>, <%= site.provinceOrTerritoryObj.name %></p>
-                <p><strong>Region:</strong> <%= site.provinceOrTerritoryObj.region %></p>
+                <p><strong>Location:</strong> <% site.location %>, <% site.ProvinceOrTerritory.name %></p>
+                <p><strong>Region:</strong> <%= site.ProvinceOrTerritory.region %></p>
                 <p><strong>Geolocation:</strong> <%= site.latitude %>, <%= site.longitude %></p>
                 <p><strong>Designated:</strong> <%= site.designated %></p>
             </div>
@@ -47,11 +47,18 @@
 
         
 
+    
+    <!-- Back and Edit Buttons -->
+    <div class="mt-8 text-center flex justify-center space-x-4 mb-8">
         <!-- Back Button -->
-        <div class="mt-8 text-center">
-            <a href="#" onclick="history.back(); return false;" class="btn btn-primary">Back</a>
-        </div>
+        <a href="#" onclick="history.back(); return false;" class="btn btn-primary">Back</a>
+        
+        <!-- Edit Button with Shadow -->
+        <a href="/editSite/<%= site.siteId %>" class="btn btn-soft bg-yellow-500 text-white hover:bg-yellow-600">Edit</a>
+
     </div>
+
+
 
     <!-- JavaScript to Fetch Random Quote -->
     <script>

@@ -1,6 +1,3 @@
-
-
-<!--Navigation Main bar home/about/sites-->
 <nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
     <!-- Left Side: Logo / Title -->
     <a href="/home" class="text-xl font-bold text-gray-900 flex items-center space-x-2">
@@ -10,7 +7,26 @@
 
     <!-- Right Side: Links -->
     <div class="flex items-center space-x-6">
-        <a href="/sites" class="<%= (page == '/sites') ? 'text-gray-900' : 'text-gray-700' %> hover:text-gray-900 hover:shadow-md transition duration-300 px-3 py-2 rounded-md">View Site Collection</a>
-        <a href="/about" class="<%= (page == '/about') ? 'text-gray-900' : 'text-gray-700' %> hover:text-gray-900 hover:shadow-md transition duration-300 px-3 py-2 rounded-md">About</a>
+        <a 
+            href="/sites" 
+            class="<%= (page == '/sites') ? 'active' : '' %> hover:shadow-md transition duration-300 px-3 py-2 rounded-md"
+            aria-current="<%= (page == '/sites') ? 'page' : 'false' %>"
+        >
+            View Site Collection
+        </a>
+        <a 
+            href="/addSite" 
+            class="<%= (page == '/addSite') ? 'active' : '' %> hover:shadow-md transition duration-300 px-3 py-2 rounded-md"
+            aria-current="<%= (page == '/addSite') ? 'page' : 'false' %>"
+        >
+            Add to Collection
+        </a>
+        <a 
+            href="/about" 
+            class="<%= (page == '/about') ? 'active' : '' %> hover:shadow-md transition duration-300 px-3 py-2 rounded-md"
+            aria-current="<%= (page == '/about') ? 'page' : 'false' %>"
+        >
+            About
+        </a>
     </div>
 </nav>

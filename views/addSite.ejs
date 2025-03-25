@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Site Details</title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <%- include('partials/navbar', { page: '/addSite' }) %>
+
+    <div class="container mx-auto p-6">
+        <!-- Hero Section -->
+        
+         <section class="container mx-auto p-8">
+          <div class="bg-base-200 p-8 rounded-lg">
+              <div class="hero-content text-center">
+                  <div>
+                      <h1 class="text-4xl font-bold text-gray-900">Add Site</h1>
+                      <p class="text-lg text-gray-700 mt-4">
+                        Use the below form to add a new NH Site to the collection
+                      </p>
+                  </div>
+              </div>
+          </div>
+        <!-- End Hero Section -->
+<br>
+        <!-- Form Section -->
+        <form action="/addSite" method="POST" class="mt-6 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-6">
+                <!-- First Column -->
+                <div class="space-y-8">
+                  <div class="mb-8">
+                    <label for="siteId"class="block text-gray-700 font-medium">Site ID</label>
+                    <input type="text" name="siteId" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                <div class="mb-8">
+                    <label  for="date" class="block text-gray-700 font-medium">Date</label>
+                    <input type="number" name="date" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                <div class="mb-8">
+                    <label for="location"class="block text-gray-700 font-medium">Location</label>
+                    <input type="text" name="location" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                <div class="mb-8">
+                    <label fro="latitude" class="block text-gray-700 font-medium">Latitude</label>
+                    <input type="number" name="latitude" step="0.00000001" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                
+                </div>
+                <!-- Second Column -->
+                <div class="apace-y-8">
+                    <div class="mb-8">
+                        <label for="site" class="block text-gray-700 font-medium">Site Name</label>
+                        <input type="text" name="site" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                    </div>
+                    <div class="mb-8">
+                        <label for="dateType" class="block text-gray-700 font-medium">Date Type</label>
+                        <input type="text" name="dateType" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                    </div>
+                    <div class="mb-8">
+                        <label for="provinceOrTerritoryCode" class="block text-gray-700 font-medium">Province/Territory</label>
+                        <select name="provinceOrTerritoryCode" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300">
+                            <% provincesAndTerritories.forEach(province => { %>
+                                <option value="<%= province.code %>"><%= province.name %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="mb-8">
+                        <label for="longitude " class="block text-gray-700 font-medium">Longitude</label>
+                        <input type="number" name="longitude" step="0.00000001" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                    </div>
+                </div>
+                <!-- Third Column -->
+                <div class="apace-y-8">
+                    <div class="mb-8">
+                        <label for="image" class="block text-gray-700 font-medium">Image URL</label>
+                        <input type="url" name="image" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                    </div>
+                    <div class="mb-8">
+                        <label for="designated" class="block text-gray-700 font-medium">Designated Year</label>
+                        <input type="number" name="designated" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                    </div>
+                    <div class="mb-8">
+                        <label for="description" class="block text-gray-700 font-medium">Description</label>
+                        <textarea name="description" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300 textarea h-32 bg-white"></textarea>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-0">
+            </div>
+            <!-- Submit Button -->
+            <div class="mt-8">
+                <button type="submit" class="btn btn-primary w-full">Add Site</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

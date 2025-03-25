@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Edit Site </title>
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+  <%- include('partials/navbar', { page: '' }) %>
+
+<div class="container mx-auto p-6">
+
+    <!--Hero Section-->
+    <section class="container mx-auto p-8">
+        <div class="bg-base-200 p-8 rounded-lg">
+            <div class="hero-content text-center">
+                <div>
+                    <h1 class="text-4xl font-bold text-gray-900">Edit Site: </h1>
+                    <h1 class="text-4xl font-bold text-gray-900"><%= site.site %></h1>
+                    <p class="text-lg text-gray-700 mt-4">
+                        Use the below form to update the Site "<%= site.site %>"
+                    </p>
+                </div>
+            </div>
+        </div>
+    <!--End Hero Section-->
+    <br>
+    <!--Form begin-->
+    <form action="/editSite" method="POST" class="mt-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-6">
+            <!-- First Column -->
+            <div class="apace-y-8">
+              <div class="mb-8">
+                <label for="siteId"class="block text-gray-700 font-medium">Site ID</label>
+                <input type="text" name="siteId" value="<%= site.siteId %>"  required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+            </div>
+            <div class="mb-8">
+                <label  for="date" class="block text-gray-700 font-medium">Date</label>
+                <input type="number" name="date" value="<%= site.date %>" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+            </div>
+            <div class="mb-8">
+                <label for="location"class="block text-gray-700 font-medium">Location</label>
+                <input type="text" name="location" value="<%= site.location %>" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+            </div>
+            <div class="mb-8">
+                <label for="latitude" class="block text-gray-700 font-medium">Latitude</label>
+                <input type="number" name="latitude" step="0.00000001" value="<%= site.latitude %>"required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+            </div>
+            
+            </div>
+            <!-- Second Column -->
+            <div class="apace-y-8">
+                <div class="mb-8">
+                    <label for="site" class="block text-gray-700 font-medium">Site Name</label>
+                    <input type="text" name="site" value="<%= site.site %>" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                <div class="mb-8">
+                    <label for="dateType" class="block text-gray-700 font-medium">Date Type</label>
+                    <input type="text" name="dateType" value="<%= site.dateType %>" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                <div class="mb-8">
+                    <label for="provinceOrTerritoryCode" class="block text-gray-700 font-medium">Province/Territory</label>
+                    <select name="provinceOrTerritoryCode" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300">
+                        <% provincesAndTerritories.forEach(province => { %>
+                            <option value="<%= province.code %>" <%= site.provinceOrTerritoryCode == province.code ? "selected" : "" %>>
+                                <%= province.name %>
+                            </option>
+                            
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="mb-8">
+                    <label for="longitude " class="block text-gray-700 font-medium">Longitude</label>
+                    <input type="number" name="longitude" step="0.00000001" value="<%= site.longitude %>" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+            </div>
+            <!-- Third Column -->
+            <div class="apace-y-8">
+                <div class="mb-8">
+                    <label for="image" class="block text-gray-700 font-medium">Image URL</label>
+                    <input type="url" name="image" value="<%= site.image %>" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                <div class="mb-8">
+                    <label for="designated" class="block text-gray-700 font-medium">Designated Year</label>
+                    <input type="number" name="designated" value="<%= site.designated %>"  required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300" />
+                </div>
+                <div class="mb-8">
+                    <label for="description" class="block text-gray-700 font-medium">Description</label>
+                    <textarea name="description" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-300 textarea h-32 bg-white"><%= site.description %></textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+ <!-- Buttons -->
+ <div class="flex justify-center gap-6 mt-auto pb-8 w-full">
+    <!-- Update Button -->
+    <div class="mt-8">
+        <button type="submit" class="btn btn-primary" aria-label="Update Site">Update Site</button>
+    </div>
+    <!-- Delete Button -->
+    <div class="mt-8">
+        <form action="/deleteSite" method="POST" onsubmit="return confirm('Are you sure you want to delete this site?');" style="display:inline;">
+            <input type="hidden" name="siteId" value="<%= site.siteId %>">
+            <button type="submit" class="btn btn-error" aria-label="Delete Site">Delete Site</button>
+        </form>
+            </div>
+        </div>
+
+    </form>
+    <!--form end-->
+</div>
+
+  
+
+     
+</body>
+</html>
